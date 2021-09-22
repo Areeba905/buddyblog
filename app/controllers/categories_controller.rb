@@ -1,15 +1,15 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show edit update destroy ]
 
-  # GET /categories or /categories.json
   def index
-    #@categories = Category.all
-  end
-"""
-  # GET /categories/1 or /categories/1.json
-  def show
+    @categories = Category.all
   end
 
+  def show
+    @title = @category.name
+    @posts = @category.posts
+  end
+"""
   # GET /categories/new
   def new
     @category = Category.new
@@ -55,7 +55,7 @@ class CategoriesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+"""
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_category
@@ -66,5 +66,5 @@ class CategoriesController < ApplicationController
     def category_params
       params.require(:category).permit(:name)
     end
-    """
+    
 end
