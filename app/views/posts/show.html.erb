@@ -1,29 +1,32 @@
-<h1> <%= @post.title %></h1>
-<p><%= @post.body %></p>
-<p><%= @post.created_at.strftime("%b %d, %Y") %></p>
-<p>Category:<%= link_to @post.category.name, category_path(:id => @post.category_id) %></p>
-<%= link_to "Back", posts_path %>
-<!--
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div class="post">
+  <h1> <%= @post.title %></h1>
+  <p><%= @post.body %></p>
+  <p><%= @post.created_at.strftime("%b %d, %Y") %></p>
+  <% if @post.admin_user %>   
+    <p> Posted by <%= @post.admin_user.name%></p>   
+  <% end %> 
+  <p>Category:<%= link_to @post.category.name, category_path(:id => @post.category_id) %></p>
+  <%= link_to "Back", posts_path %>
+  <hr/>
+  <h1> ADD COMMENT</h1>
+  <%= form_for @post_comment do |f| %>
+    <%= f.number_field :post_id,value: @post.id, type: :hidden %>
+    <p>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </p>
+    <p>
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+    </p>
+    <p>
+      <%= f.submit "Add Comment" %>
+    </p>
+  <% end %>
+  <%= render :partial => "partials/post_comment", :collection => @post.post_comments %>
+</div>
 
-<p>
-  <strong>Body:</strong>
-  <%= @post.body %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @post.category_id %>
-</p>
-
-<p>
-  <strong>Author:</strong>
-  <%= @post.author_id %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
--->

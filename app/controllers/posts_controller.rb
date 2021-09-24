@@ -3,11 +3,15 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.all
+    @q = Post.search(params[:q])
+    @posts = @q.result(distinct:true)
+
   end
 
   # GET /posts/1 or /posts/1.json
   def show
+    @user = AdminUser.all
+    @post_comment = PostComment.new(:post => @post)
   end
 
   # GET /posts/new
@@ -65,7 +69,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :body, :category_id, :author_id)
+      params.require(:post).permit(:title, :body, :category_id, :admin_user_id)
     end
     
 end

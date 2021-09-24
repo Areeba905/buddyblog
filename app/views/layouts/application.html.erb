@@ -5,15 +5,37 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css" />
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%if notice.present? %>
-      <%= notice %>
-    <% end %>
-    <%= yield %>
+    <%= render "partials/header" %>
+      <div id="page">
+        <div id="page-bgtop">
+          <div id="page-bgbtm">
+            <div id="content">
+              <div class="flash-message">
+                <%if notice.present? %>
+                  <%= notice %>
+                <% end %>
+              </div>
+              <%= yield %>
+              <div style="clear: both;">&nbsp;</div>
+            </div>
+            <!-- end #content -->
+           
+            <%= render "partials/sidebar" %>
+
+            <div style="clear: both;">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+      <!-- end #page -->
+      <div id="footer">
+        <p>&copy; 2013, My Ruby Blog - Sample Project</p>
+      </div>
+    </div>
+    <!-- end #footer -->
   </body>
 </html>

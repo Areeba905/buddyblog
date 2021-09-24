@@ -1,0 +1,17 @@
+
+<% @posts.each do |post| %>
+<div class="post">
+    <h2 class="title"><%= link_to post.title,post %></h2>
+    <div class="entry"><%= post.body %></div>
+   
+    <div class="byline">
+        <p class="meta"><%= post.created_at.strftime("%d %b, %Y") %></p>
+        <% if post.admin_user %>   
+            <p> Posted by <%= post.admin_user.name%></p>   
+        <% end %> 
+        <p class="links"><%= link_to "Read More", post %></p>
+    </div>
+</div>
+    
+<% end %>
+
